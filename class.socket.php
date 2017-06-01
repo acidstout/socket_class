@@ -24,10 +24,11 @@ class socket {
 			$this->hostname = $hostname;
 			$this->port = $port;
 			$this->timeout = $timeout;
-		} else {
-			$this->error = "Cannot initialize socket class due to missing parameters.";
-			return false;
+			return true;
 		}
+		
+		$this->error = "Cannot initialize socket class due to missing parameters.";
+		return false;
 	}// END: __constuct()
 	
 	
@@ -41,10 +42,10 @@ class socket {
 			socket_set_blocking($this->socket, 0);
 			socket_set_timeout($this->socket, $this->timeout * 1000000); // microseconds
 			return true;
-		} else {
-			$this->error = "{$this->errstr} (#{$this->errno}, " . __FILE__ . ", " . __LINE__ . ")";
-			return false;
 		}
+		
+		$this->error = "{$this->errstr} (#{$this->errno}, " . __FILE__ . ", " . __LINE__ . ")";
+		return false;
 	}// END: open()
 	
 
